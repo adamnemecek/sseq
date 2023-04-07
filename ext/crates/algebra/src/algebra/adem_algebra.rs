@@ -594,7 +594,7 @@ impl AdemAlgebra {
             let n = n as i32;
             let residue = n % q;
 
-            let mut basis: Vec<AdemBasisElement> = vec![];
+            let mut basis = vec![];
             // First we need to know how many bocksteins we'll use so we know how much degree
             // to assign to the Ps. The Ps all have degree divisible by q=2p-2, so num_bs needs to
             // be congruent to degree mod q.

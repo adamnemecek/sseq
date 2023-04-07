@@ -1002,8 +1002,8 @@ impl MilnorAlgebra {
     }
 
     fn multiply_qpart(&self, m1: &MilnorBasisElement, f: u32) -> Vec<(u32, MilnorBasisElement)> {
-        let mut new_result: Vec<(u32, MilnorBasisElement)> = vec![(1, m1.clone())];
-        let mut old_result: Vec<(u32, MilnorBasisElement)> = vec![];
+        let mut new_result = vec![(1, m1.clone())];
+        let mut old_result = vec![];
 
         for k in BitflagIterator::set_bit_iterator(f as u64) {
             let k = k as u32;

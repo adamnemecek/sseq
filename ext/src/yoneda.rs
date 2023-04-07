@@ -547,7 +547,7 @@ where
     let algebra = source.algebra();
     let p = algebra.prime();
 
-    let mut generators: Vec<(i32, usize)> = vec![];
+    let mut generators = vec![];
     let mut target_dims = vec![];
 
     let source_orig_dimension = source.module.dimension(t);

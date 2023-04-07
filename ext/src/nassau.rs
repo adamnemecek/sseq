@@ -661,8 +661,8 @@ impl<M: ZeroModule<Algebra = MilnorAlgebra>> Resolution<M> {
         }
 
         // Now add correction terms
-        let mut target_mask: Vec<usize> = vec![];
-        let mut next_mask: Vec<usize> = vec![];
+        let mut target_mask = vec![];
+        let mut next_mask = vec![];
 
         for signature in subalgebra.iter_signatures(t) {
             target_mask.clear();
