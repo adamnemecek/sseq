@@ -450,7 +450,7 @@ impl<'de> Deserialize<'de> for FpVector {
 }
 
 impl<'a, 'b> From<&'a mut SliceMut<'b>> for SliceMut<'a> {
-    fn from(slice: &'a mut SliceMut<'b>) -> SliceMut<'a> {
+    fn from(slice: &'a mut SliceMut<'b>) -> Self {
         slice.copy()
     }
 }
@@ -513,7 +513,7 @@ mod test {
                 .collect()
         }
 
-        pub fn diff_vec(&self, other: &FpVector) -> Vec<VectorDiffEntry> {
+        pub fn diff_vec(&self, other: &Self) -> Vec<VectorDiffEntry> {
             assert!(self.len() == other.len());
             let mut result = vec![];
             for index in 0..self.len() {
@@ -544,11 +544,11 @@ mod test {
                 "assert {} == {:?}\n{}",
                 self,
                 other,
-                FpVector::format_diff(diff)
+                Self::format_diff(diff)
             );
         }
 
-        pub fn assert_vec_eq(&self, other: &FpVector) {
+        pub fn assert_vec_eq(&self, other: &Self) {
             let diff = self.diff_vec(other);
             if diff.is_empty() {
                 return;
@@ -557,7 +557,7 @@ mod test {
                 "assert {} == {:?}\n{}",
                 self,
                 other,
-                FpVector::format_diff(diff)
+                Self::format_diff(diff)
             );
         }
     }

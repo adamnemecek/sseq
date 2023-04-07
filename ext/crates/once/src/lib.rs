@@ -66,20 +66,19 @@ impl<T> Page<T> {
     /// This has to be the `page`th page and `len` many items has to have been written into the
     /// `OnceVec` owning this page.
     unsafe fn deallocate(&mut self, len: usize, page_index: usize) {
-        if let Some(ptr) = self.0 {
-            if len > 0 {
-                let (max_page, max_index) = inner_index(len - 1);
-                let end = if page_index == max_page {
-                    max_index + 1
-                } else {
-                    1 << page_index
-                };
-                for idx in 0..end {
-                    std::ptr::drop_in_place(ptr.as_ptr().add(idx));
-                }
+        let Some(ptr) = self.0 else { return };
+        if len > 0 {
+            let (max_page, max_index) = inner_index(len - 1);
+            let end = if page_index == max_page {
+                max_index + 1
+            } else {
+                1 << page_index
+            };
+            for idx in 0..end {
+                std::ptr::drop_in_place(ptr.as_ptr().add(idx));
             }
-            alloc::alloc::dealloc(ptr.as_ptr() as *mut u8, Self::layout(page_index));
         }
+        alloc::alloc::dealloc(ptr.as_ptr() as *mut u8, Self::layout(page_index));
     }
 
     fn ptr(&self) -> *mut T {
@@ -660,7 +659,7 @@ impl<T: fmt::Debug> fmt::Debug for OnceBiVec<T> {
 
 impl<T> OnceBiVec<T> {
     pub fn new(min_degree: i32) -> Self {
-        OnceBiVec {
+        Self {
             data: OnceVec::new(),
             min_degree,
         }
