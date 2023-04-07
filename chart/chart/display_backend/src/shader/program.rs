@@ -24,7 +24,7 @@ impl Program {
             fragment_shader,
         )?;
         let program = link_program(&webgl, &vert_shader, &frag_shader)?;
-        Ok(Program { webgl, program })
+        Ok(Self { webgl, program })
     }
 
     pub fn use_program(&self) {

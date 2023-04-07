@@ -1302,7 +1302,7 @@ impl<'a, const MOD4: bool> PPartMultiplier<'a, MOD4> {
             p_part: allocation.p_part,
             degree,
         };
-        PPartMultiplier {
+        Self {
             #[cfg(feature = "odd-primes")]
             diagonal: allocation.diagonal,
             p,

@@ -1,6 +1,6 @@
 use lyon::tessellation as tess;
-use tess::{StrokeVertexConstructor, StrokeAttributes};
 use tess::math::{Point, Vector};
+use tess::{StrokeAttributes, StrokeVertexConstructor};
 
 #[derive(Copy, Clone, Debug)]
 pub struct PositionNormal {
@@ -13,10 +13,11 @@ pub struct PositionNormalConstructor;
 
 impl StrokeVertexConstructor<PositionNormal> for PositionNormalConstructor {
     fn new_vertex(&mut self, position: Point, attributes: StrokeAttributes) -> PositionNormal {
-        let normal = if attributes.side().is_right() { attributes.normal() } else { Vector::new(0.0, 0.0) };
-        PositionNormal {
-            position,
-            normal
-        }
+        let normal = if attributes.side().is_right() {
+            attributes.normal()
+        } else {
+            Vector::new(0.0, 0.0)
+        };
+        PositionNormal { position, normal }
     }
 }
