@@ -221,16 +221,8 @@ impl<T> PartialEq for OnceVec<T>
 where
     T: PartialEq,
 {
-    fn eq(&self, other: &OnceVec<T>) -> bool {
-        if self.len() != other.len() {
-            return false;
-        }
-        for i in 0..self.len() {
-            if self[i] != other[i] {
-                return false;
-            }
-        }
-        true
+    fn eq(&self, other: &Self) -> bool {
+        self.len() == other.len() && self.iter().eq(other.iter())
     }
 }
 

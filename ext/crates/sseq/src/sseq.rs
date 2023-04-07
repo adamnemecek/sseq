@@ -416,11 +416,11 @@ impl<P: SseqProfile> Sseq<P> {
 
         // The class and the product are both permanent.
         if r == i32::MAX && target_product.is_none() {
-            if self.add_permanent_class(source_x, source_y, source_class.as_slice()) {
-                return Some((i32::MAX, source_x, source_y, source_class));
+            return if self.add_permanent_class(source_x, source_y, source_class.as_slice()) {
+                Some((i32::MAX, source_x, source_y, source_class))
             } else {
-                return None;
-            }
+                None
+            };
         }
 
         let neg_1 = *self.p - 1;

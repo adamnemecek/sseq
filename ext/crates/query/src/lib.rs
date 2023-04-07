@@ -43,11 +43,7 @@ pub fn with_default<S, E: Display>(
     mut parser: impl for<'a> FnMut(&'a str) -> Result<S, E>,
 ) -> S {
     raw(&format!("{prompt} (default: {default})"), |x| {
-        if x.is_empty() {
-            parser(default)
-        } else {
-            parser(x)
-        }
+        parser(if x.is_empty() { default } else { x })
     })
 }
 
