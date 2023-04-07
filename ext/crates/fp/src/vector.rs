@@ -564,12 +564,8 @@ mod test {
 
     fn random_vector(p: impl Into<u32>, dimension: usize) -> Vec<u32> {
         let p: u32 = p.into();
-        let mut result = Vec::with_capacity(dimension);
         let mut rng = rand::thread_rng();
-        for _ in 0..dimension {
-            result.push(rng.gen::<u32>() % p);
-        }
-        result
+        (0..dimension).map(|_| rng.gen::<u32>() % p).collect()
     }
 
     macro_rules! test_dim {
