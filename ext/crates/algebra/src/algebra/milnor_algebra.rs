@@ -19,7 +19,7 @@ pub trait MilnorAlgebraT: Send + Sync + Algebra {
 }
 
 impl MilnorAlgebraT for MilnorAlgebra {
-    fn milnor_algebra(&self) -> &MilnorAlgebra {
+    fn milnor_algebra(&self) -> &Self {
         self
     }
 }
@@ -105,7 +105,7 @@ impl MilnorProfile {
 
 impl Default for MilnorProfile {
     fn default() -> Self {
-        MilnorProfile {
+        Self {
             truncated: false,
             q_part: !0,
             p_part: vec![],

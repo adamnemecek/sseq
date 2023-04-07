@@ -470,9 +470,13 @@ mod sum_module {
 
 mod tensor_product_chain_complex {
     use super::sum_module::SumModule;
-    use algebra::module::homomorphism::ModuleHomomorphism;
-    use algebra::module::{Module, TensorModule, ZeroModule};
-    use algebra::{Algebra, Bialgebra};
+    use algebra::{
+        module::{
+            homomorphism::ModuleHomomorphism,
+            {Module, TensorModule, ZeroModule},
+        },
+        Algebra, Bialgebra,
+    };
     use ext::chain_complex::ChainComplex;
     use fp::matrix::AugmentedMatrix;
     use fp::vector::{FpVector, Slice, SliceMut};

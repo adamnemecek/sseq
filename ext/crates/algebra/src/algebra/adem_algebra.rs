@@ -27,7 +27,7 @@ pub trait AdemAlgebraT: Send + Sync + Algebra {
 }
 
 impl AdemAlgebraT for AdemAlgebra {
-    fn adem_algebra(&self) -> &AdemAlgebra {
+    fn adem_algebra(&self) -> &Self {
         self
     }
 }
