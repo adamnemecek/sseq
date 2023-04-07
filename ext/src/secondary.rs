@@ -1069,7 +1069,7 @@ where
             &d[std::cmp::min(3, d.len() - 1)]
         });
 
-        let mut scratch0: Vec<u32> = Vec::new();
+        let mut scratch0: Vec<u32> = vec![];
         for (input, mut out) in inputs.zip_eq(outputs) {
             scratch0.clear();
             scratch0.resize(source_num_gens, 0);

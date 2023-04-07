@@ -280,7 +280,7 @@ impl<P: SseqProfile> Sseq<P> {
                     cur.add_gen(gen);
                 }
                 if r - 1 < self.differentials[x][y].len() {
-                    differentials.push(vec![Vec::new(); self.page_data[x][y][r].dimension()]);
+                    differentials.push(vec![vec![]; self.page_data[x][y][r].dimension()]);
                 }
             } else {
                 let d = &self.differentials[x][y][r - 1];

@@ -110,7 +110,7 @@ impl GlyphShader {
         Ok(Self {
             webgl,
             program,
-            glyph_map: Vec::new(),
+            glyph_map: vec![],
 
             attribute_state,
             glyph_instances,

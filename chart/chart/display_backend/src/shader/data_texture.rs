@@ -27,7 +27,7 @@ impl<T: std::fmt::Debug + std::default::Default> DataTexture<T> {
             webgl,
             width: 2048,
             format,
-            data: Vec::new(),
+            data: vec![],
             used_entries: 0,
             texture: None,
             texture_rows: 0,

@@ -78,7 +78,7 @@ fn main() -> anyhow::Result<()> {
     }
 
     /* #[cfg(feature = "concurrent")]
-    let mut prev_i_receivers: Vec<Option<Receiver<()>>> = Vec::new();
+    let mut prev_i_receivers: Vec<Option<Receiver<()>>> = vec![];
     #[cfg(feature = "concurrent")]
     for _ in 0..=2 * s {
         prev_i_receivers.push(None);
@@ -909,7 +909,7 @@ mod tensor_product_chain_complex {
                                     + self.target.modules[s].offset(degree, left_t)
                                     + li * target_right_dim
                                     + ri;
-                                let mut entries = Vec::new();
+                                let mut entries = vec![];
                                 let mut offset = 0;
                                 for s_ in 0..=self.source_s as usize {
                                     let dim = {

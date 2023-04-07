@@ -273,7 +273,7 @@ impl Canvas {
         edge_options: &EdgeOptions,
     ) -> Result<(), JsValue> {
         self.clear();
-        let mut glyph_instances = Vec::new();
+        let mut glyph_instances = vec![];
 
         for x in 0..xy_max {
             for y in 0..xy_max {

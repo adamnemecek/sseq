@@ -90,7 +90,7 @@ impl<M: Module> QuotientModule<M> {
 
     pub fn quotient_all(&mut self, degree: i32) {
         self.subspaces[degree].set_to_entire();
-        self.basis_list[degree] = Vec::new();
+        self.basis_list[degree] = vec![];
     }
 
     pub fn act_on_original_basis(

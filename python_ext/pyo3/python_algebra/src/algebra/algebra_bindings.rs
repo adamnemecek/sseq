@@ -40,7 +40,7 @@ pub fn bitmask_u32_from_vec(vec: &Vec<u32>) -> u32 {
 }
 
 pub fn bitmask_u32_to_vec(mut bitmask: u32) -> Vec<u32> {
-    let mut result = Vec::new();
+    let mut result = vec![];
     // TODO: make sure we get ordering correct here
     while bitmask != 0 {
         result.push(bitmask & 1);

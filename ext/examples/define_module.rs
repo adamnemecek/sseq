@@ -42,8 +42,8 @@ pub fn get_gens() -> anyhow::Result<BiVec<Vec<String>>> {
 
         let gen_deg = gen_deg.unwrap();
 
-        gens.extend_negative(gen_deg, Vec::new());
-        gens.extend_with(gen_deg, |_| Vec::new());
+        gens.extend_negative(gen_deg, vec![]);
+        gens.extend_with(gen_deg, |_| vec![]);
 
         let gen_name = query::with_default(
             "Generator name",
@@ -198,8 +198,8 @@ pub fn interactive_module_define_fpmodule(
         }
     }
 
-    let mut adem_relations = Vec::new();
-    let mut milnor_relations = Vec::new();
+    let mut adem_relations = vec![];
+    let mut milnor_relations = vec![];
 
     loop {
         let relation = query::raw("Enter relation", |rel| {

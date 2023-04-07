@@ -190,7 +190,7 @@ impl ResolutionManager {
     pub fn send_error(&self, message: String) {
         self.sender
             .send(Message {
-                recipients: Vec::new(),
+                recipients: vec![],
                 sseq: SseqChoice::Main,
                 action: Action::from(Error { message }),
             })
@@ -271,7 +271,7 @@ impl SseqManager {
     pub fn send_error(&self, message: String) {
         self.sender
             .send(Message {
-                recipients: Vec::new(),
+                recipients: vec![],
                 sseq: SseqChoice::Main,
                 action: Action::from(Error { message }),
             })

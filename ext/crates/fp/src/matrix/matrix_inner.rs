@@ -42,7 +42,7 @@ impl Matrix {
             p,
             columns,
             vectors,
-            pivots: Vec::new(),
+            pivots: vec![],
         }
     }
 
@@ -61,7 +61,7 @@ impl Matrix {
             p,
             columns,
             vectors,
-            pivots: Vec::new(),
+            pivots: vec![],
         }
     }
 
@@ -85,7 +85,7 @@ impl Matrix {
             p,
             columns,
             vectors,
-            pivots: Vec::new(),
+            pivots: vec![],
         })
     }
 
@@ -188,7 +188,7 @@ impl Matrix {
             p,
             columns,
             vectors,
-            pivots: Vec::new(),
+            pivots: vec![],
         }
     }
 
@@ -779,7 +779,7 @@ impl Matrix {
         end_column: usize,
         extra_column_capacity: usize,
     ) -> Vec<usize> {
-        let mut added_pivots = Vec::new();
+        let mut added_pivots = vec![];
         let columns = self.columns();
 
         for (i, &pivot) in self.pivots[start_column..end_column].iter().enumerate() {
@@ -812,7 +812,7 @@ impl Matrix {
         desired_image: &Subspace,
         extra_column_capacity: usize,
     ) -> Vec<usize> {
-        let mut added_pivots = Vec::new();
+        let mut added_pivots = vec![];
         let desired_pivots = desired_image.pivots();
         let early_end_column = std::cmp::min(end_column, desired_pivots.len() + start_column);
 

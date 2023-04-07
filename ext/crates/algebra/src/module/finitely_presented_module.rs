@@ -187,8 +187,8 @@ impl<A: Algebra> Module for FinitelyPresentedModule<A> {
 
         self.index_table.extend(degree, |i| {
             let qi = self.map.quasi_inverse(i).unwrap();
-            let mut gen_idx_to_fp_idx = Vec::new();
-            let mut fp_idx_to_gen_idx = Vec::new();
+            let mut gen_idx_to_fp_idx = vec![];
+            let mut fp_idx_to_gen_idx = vec![];
             for (i, &pivot) in qi.pivots().unwrap().iter().enumerate() {
                 if pivot < 0 {
                     gen_idx_to_fp_idx.push(fp_idx_to_gen_idx.len() as isize);

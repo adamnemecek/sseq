@@ -25,7 +25,7 @@ impl BlockStructure {
     pub fn new(block_sizes: &BiVec<Vec<usize>>) -> Self {
         let mut total_dimension = 0;
         let mut blocks = BiVec::with_capacity(block_sizes.min_degree(), block_sizes.len());
-        let mut basis_element_to_block_idx = Vec::new();
+        let mut basis_element_to_block_idx = vec![];
         for (degree, block_sizes) in block_sizes.iter_enum() {
             let mut block_starts_entry = Vec::with_capacity(block_sizes.len());
             for (i, size) in block_sizes.iter().enumerate() {

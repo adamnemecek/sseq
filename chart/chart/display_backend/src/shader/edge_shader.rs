@@ -224,7 +224,7 @@ impl EdgeShader {
             arrow_metrics_data,
             arrow_path_data,
 
-            dash_data: Vec::new(),
+            dash_data: vec![],
             dash_texture,
             dash_texture_num_rows: 0,
             dash_map,

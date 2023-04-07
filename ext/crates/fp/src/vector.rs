@@ -515,7 +515,7 @@ mod test {
 
         pub fn diff_vec(&self, other: &FpVector) -> Vec<VectorDiffEntry> {
             assert!(self.len() == other.len());
-            let mut result = Vec::new();
+            let mut result = vec![];
             for index in 0..self.len() {
                 let left = self.entry(index);
                 let right = other.entry(index);
@@ -669,7 +669,7 @@ mod test {
             let v_arr = random_vector(p, dim);
             let v = FpVector::from_slice(p, &v_arr);
 
-            let mut diffs = Vec::new();
+            let mut diffs = vec![];
             for (i, val) in v.iter().enumerate() {
                 if v.entry(i) != val {
                     diffs.push((i, val, v.entry(i)));
@@ -686,7 +686,7 @@ mod test {
                 "slice_start: {slice_start}, slice_end: {slice_end}, slice: {v}"
                 );
 
-            let mut diffs = Vec::new();
+            let mut diffs = vec![];
             for i in 0..v.len() {
                 if v.entry(i) != v_arr[i + slice_start] {
                     diffs.push((i, v_arr[i + slice_start], v.entry(i)));
@@ -716,7 +716,7 @@ mod test {
             let v = v.as_slice();
 
             // println!("slice_start: {}, slice_end: {}, slice: {}", slice_start, slice_end, v);
-            let mut diffs = Vec::new();
+            let mut diffs = vec![];
             for (i, &val) in v_arr.iter().enumerate() {
                 if v.entry(i) != val {
                     diffs.push((i, val, v.entry(i)));
@@ -1045,7 +1045,7 @@ mod test {
         }
         println!("out : {comparison_result:?}");
 
-        let mut diffs = Vec::new();
+        let mut diffs = vec![];
         let mut diffs_str = String::new();
         for i in 0..dim {
             if vec_result[i] != comparison_result[i] {
@@ -1475,7 +1475,7 @@ mod test {
                 true,
             ),
         ];
-        let mut diffs = Vec::new();
+        let mut diffs = vec![];
         for &(in1_limb1, in1_limb2, in2_limb1, in2_limb2, res1, res2) in tests.iter() {
             in1.limbs_mut()[1] = in1_limb1;
             in1.limbs_mut()[0] = in1_limb2;

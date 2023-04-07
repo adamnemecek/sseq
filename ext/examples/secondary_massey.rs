@@ -272,7 +272,7 @@ fn main() -> anyhow::Result<()> {
         &d[std::cmp::min(3, d.len() - 1)]
     }
 
-    let mut scratch0: Vec<u32> = Vec::new();
+    let mut scratch0: Vec<u32> = vec![];
     let mut scratch1 = FpVector::new(p, 0);
 
     let h_0 = ch_lift.algebra().p_tilde();

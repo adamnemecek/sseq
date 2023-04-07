@@ -244,7 +244,7 @@ impl<P: SseqProfile> SseqWrapper<P> {
             ClassState::InProgress
         };
 
-        let mut decompositions: Vec<(FpVector, String, i32, i32)> = Vec::new();
+        let mut decompositions: Vec<(FpVector, String, i32, i32)> = vec![];
         for (name, prod) in &self.products {
             let prod_x = prod.inner.x;
             let prod_y = prod.inner.y;

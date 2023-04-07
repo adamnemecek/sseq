@@ -288,7 +288,7 @@ impl Algebra for AdemAlgebra {
         let q = self.q();
 
         let mut bocksteins = 0;
-        let mut ps = Vec::new();
+        let mut ps = vec![];
         let mut degree = 0;
         let mut bockstein_count = 0;
 
@@ -401,10 +401,10 @@ impl GeneratedAlgebra for AdemAlgebra {
 
         let p = self.prime();
         let inadmissible_pairs = combinatorics::inadmissible_pairs(p, self.generic, degree);
-        let mut result = Vec::new();
+        let mut result = vec![];
 
         for (x, b, y) in inadmissible_pairs {
-            let mut relation = Vec::new();
+            let mut relation = vec![];
             // Adem relation
             let first_sq = self.beps_pn(0, x);
             let second_sq = self.beps_pn(b, y);
@@ -520,7 +520,7 @@ impl AdemAlgebra {
         self.even_basis_table.extend(max_degree as usize, |n| {
             let n = n as i32;
 
-            let mut basis = Vec::new();
+            let mut basis = vec![];
             // Put Sqn into the list.
             basis.push(AdemBasisElement {
                 degree: n,
@@ -594,7 +594,7 @@ impl AdemAlgebra {
             let n = n as i32;
             let residue = n % q;
 
-            let mut basis: Vec<AdemBasisElement> = Vec::new();
+            let mut basis: Vec<AdemBasisElement> = vec![];
             // First we need to know how many bocksteins we'll use so we know how much degree
             // to assign to the Ps. The Ps all have degree divisible by q=2p-2, so num_bs needs to
             // be congruent to degree mod q.
@@ -692,7 +692,7 @@ impl AdemAlgebra {
     }
 
     fn generate_multiplication_table_2(&self, max_degree: i32) {
-        self.multiplication_table.extend(0, |_| Vec::new());
+        self.multiplication_table.extend(0, |_| vec![]);
 
         // degree -> first_square -> admissibile sequence idx -> result vector
         self.multiplication_table.extend(max_degree as usize, |n| {
@@ -772,7 +772,7 @@ impl AdemAlgebra {
     }
 
     fn generate_multiplication_table_generic(&self, max_degree: i32) {
-        self.multiplication_table.extend(0, |_| Vec::new());
+        self.multiplication_table.extend(0, |_| vec![]);
 
         let q = 2 * (*self.prime()) as i32 - 2;
         self.multiplication_table.extend(max_degree as usize, |n| {
@@ -1312,7 +1312,7 @@ impl AdemAlgebra {
             second_degree,
             second_idx,
         );
-        let mut result = Vec::new();
+        let mut result = vec![];
         let c = out_vec.entry(idx);
         assert!(c != 0);
         let c_inv = fp::prime::inverse(p, *p - c);

@@ -67,7 +67,7 @@ impl BidegreeData {
             basis: Basis::new(p, dimension),
             product_tensor,
             decomposables: Subspace::new(p, dimension + 1, dimension),
-            indecomposable_decompositions: Vec::new(),
+            indecomposable_decompositions: vec![],
         }
     }
 }
@@ -88,7 +88,7 @@ impl DenseBigradedAlgebra {
             min_y,
             data: OnceBiVec::new(min_x),
             named_indecomposables: RwLock::new(BTreeMap::new()),
-            updated_bidegrees: Mutex::new(Vec::new()),
+            updated_bidegrees: Mutex::new(vec![]),
         }
     }
 
@@ -425,7 +425,7 @@ impl DenseBigradedAlgebra {
                 });
         }
         let prev_decompositions = {
-            let mut prev_decompositions = Vec::new();
+            let mut prev_decompositions = vec![];
             for (x, r) in self.data.iter_enum() {
                 for (y, data) in r.iter_enum() {
                     prev_decompositions.extend(
@@ -462,7 +462,7 @@ impl DenseBigradedAlgebra {
         sv_out: &mut FpVector,
     ) -> Result<(), ()> {
         for (i, &(gen_x, gen_y, gen_idx)) in new_indecs.iter().enumerate() {
-            let mut new_decompositions = Vec::new();
+            let mut new_decompositions = vec![];
             for (dec_x, dec_y, dec_vec, mono) in &prev_decompositions {
                 let dec_x = *dec_x;
                 let dec_y = *dec_y;

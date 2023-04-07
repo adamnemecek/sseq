@@ -192,7 +192,7 @@ fn read_bruner_resolution(data_dir: &Path, max_n: i32) -> Result<(u32, FiniteCha
 
         read_line(&mut f, &mut buf)?;
 
-        let mut entries: Vec<FpVector> = Vec::new();
+        let mut entries: Vec<FpVector> = vec![];
         let mut cur_degree: i32 = 0;
 
         while let Some((t, gen)) = get_element(algebra, cc.module(s - 1).as_ref(), &mut f)? {

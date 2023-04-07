@@ -270,7 +270,7 @@ impl<A: Algebra> FiniteDimensionalModule<A> {
         self.graded_dimension.extend_with(degree, |_| 0);
         self.graded_dimension[degree] += 1;
 
-        self.gen_names.extend_with(degree, |_| Vec::new());
+        self.gen_names.extend_with(degree, |_| vec![]);
         self.gen_names[degree].push(name);
 
         let min_degree = self.graded_dimension.min_degree();
@@ -654,7 +654,7 @@ impl<A: GeneratedAlgebra> FiniteDimensionalModule<A> {
         let algebra = self.algebra();
         let min_degree = self.min_degree();
         let max_degree = self.graded_dimension.len();
-        let mut actions = Vec::new();
+        let mut actions = vec![];
         for input_degree in min_degree..max_degree {
             for output_degree in (input_degree + 1)..max_degree {
                 if self.dimension(output_degree) == 0 {

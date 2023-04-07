@@ -80,11 +80,11 @@ impl Resolution<ext::CCC> {
             sseq,
 
             product_names: HashSet::default(),
-            product_list: Vec::new(),
+            product_list: vec![],
             unit_resolution: UnitResolution::None,
 
             filtration_one_products: algebra.default_filtration_one_products(),
-            self_maps: Vec::new(),
+            self_maps: vec![],
             chain_maps_to_unit_resolution: OnceVec::new(),
         };
 

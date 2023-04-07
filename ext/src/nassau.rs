@@ -661,8 +661,8 @@ impl<M: ZeroModule<Algebra = MilnorAlgebra>> Resolution<M> {
         }
 
         // Now add correction terms
-        let mut target_mask: Vec<usize> = Vec::new();
-        let mut next_mask: Vec<usize> = Vec::new();
+        let mut target_mask: Vec<usize> = vec![];
+        let mut next_mask: Vec<usize> = vec![];
 
         for signature in subalgebra.iter_signatures(t) {
             target_mask.clear();
@@ -1096,7 +1096,7 @@ impl<M: ZeroModule<Algebra = MilnorAlgebra>> ChainComplex for Resolution<M> {
 
             (target_zero_mask, matrix)
         } else {
-            (Vec::new(), AugmentedMatrix::<3>::new(p, 0, [0, 0, 0]))
+            (vec![], AugmentedMatrix::<3>::new(p, 0, [0, 0, 0]))
         };
 
         loop {
@@ -1141,7 +1141,7 @@ impl<M: ZeroModule<Algebra = MilnorAlgebra>> ChainComplex for Resolution<M> {
                 }
 
                 // Drop these objects to save a bit of memory
-                target_zero_mask = Vec::new();
+                target_zero_mask = vec![];
                 dx_matrix = AugmentedMatrix::<3>::new(p, 0, [0, 0, 0]);
             } else {
                 scratch0.update_from_bytes(&mut f).unwrap();

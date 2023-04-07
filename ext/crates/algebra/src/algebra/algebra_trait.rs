@@ -152,7 +152,7 @@ pub trait Algebra: std::fmt::Display + Send + Sync + 'static {
     /// `(name, degree, index)` for which we want to compute products with in
     /// the resolutions.
     fn default_filtration_one_products(&self) -> Vec<(String, i32, usize)> {
-        Vec::new()
+        vec![]
     }
 
     /// Converts a basis element into a string for display.

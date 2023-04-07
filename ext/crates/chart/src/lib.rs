@@ -445,7 +445,7 @@ mod test {
 
     #[test]
     fn test_legend() {
-        let mut res: Vec<u8> = Vec::new();
+        let mut res: Vec<u8> = vec![];
         SvgBackend::legend(&mut res).unwrap();
 
         expect_file!["../legend.svg"].assert_eq(std::str::from_utf8(&res).unwrap());

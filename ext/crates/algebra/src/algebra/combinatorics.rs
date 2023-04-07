@@ -58,7 +58,7 @@ pub fn inadmissible_pairs(p: ValidPrime, generic: bool, degree: i32) -> Vec<(u32
     let degree = degree as u32;
     let q = if generic { 2 * p - 2 } else { 1 };
     // (i, b, j) means P^i P^j if b = 0, or P^i b P^j if b = 1.
-    let mut inadmissible_pairs = Vec::new();
+    let mut inadmissible_pairs = vec![];
 
     // Since |P^i| is always a multiple of q, we have a relation only if degree = 0 or 1 mod q.
     // If it is 0, then there is no Bockstein. Otherwise, there is.
@@ -145,15 +145,15 @@ impl TruncatedPolynomialMonomialBasis {
         let p = *self.p;
         let idx = self.gens[degree as usize - 1].0 + self.gens[degree as usize - 1].1;
         self.gens.push((idx, new_gens));
-        let mut new_parts_by_max = Vec::new();
-        let mut new_parts = Vec::new();
+        let mut new_parts_by_max = vec![];
+        let mut new_parts = vec![];
         new_parts_by_max.push(vec![]);
         for _ in 0..new_gens {
             self.gen_degrees.push(degree);
         }
         // println!("degree : {}", degree);
         for last_deg in 1..=degree {
-            let mut partitions_cur_max_part = Vec::new();
+            let mut partitions_cur_max_part = vec![];
             let (offset, num_gens) = self.gens[last_deg as usize];
             if num_gens == 0 {
                 new_parts_by_max.push(partitions_cur_max_part);

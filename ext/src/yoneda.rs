@@ -547,8 +547,8 @@ where
     let algebra = source.algebra();
     let p = algebra.prime();
 
-    let mut generators: Vec<(i32, usize)> = Vec::new();
-    let mut target_dims = Vec::new();
+    let mut generators: Vec<(i32, usize)> = vec![];
+    let mut target_dims = vec![];
 
     let source_orig_dimension = source.module.dimension(t);
     let source_dimension = source.dimension(t);

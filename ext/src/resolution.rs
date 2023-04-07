@@ -503,7 +503,7 @@ where
         // work out what dX should to to each of them.
         let cc_new_gens = matrix.extend_to_surjection(0, target_cc_dimension, MAX_NEW_GENS);
 
-        let mut res_new_gens = Vec::new();
+        let mut res_new_gens = vec![];
 
         if s > 0 {
             if !cc_new_gens.is_empty() {

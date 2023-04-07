@@ -108,7 +108,7 @@ impl Default for MilnorProfile {
         MilnorProfile {
             truncated: false,
             q_part: !0,
-            p_part: Vec::new(),
+            p_part: vec![],
         }
     }
 }
@@ -801,9 +801,9 @@ impl GeneratedAlgebra for MilnorAlgebra {
         }
         let p = self.prime();
         let inadmissible_pairs = combinatorics::inadmissible_pairs(p, self.generic(), degree);
-        let mut result = Vec::new();
+        let mut result = vec![];
         for (x, b, y) in inadmissible_pairs {
-            let mut relation = Vec::new();
+            let mut relation = vec![];
             // Adem relation. Sometimes these don't exist because of profiles. Then just ignore it.
             (|| {
                 let (first_degree, first_index) = self.try_beps_pn(0, x as PPartEntry)?;
@@ -848,7 +848,7 @@ impl GeneratedAlgebra for MilnorAlgebra {
 // Compute basis functions
 impl MilnorAlgebra {
     fn compute_ppart(&self, max_degree: i32) {
-        self.ppart_table.extend(0, |_| vec![Vec::new()]);
+        self.ppart_table.extend(0, |_| vec![vec![]]);
 
         let p = *self.prime() as i32;
         let q = if p == 2 { 1 } else { 2 * p - 2 };
@@ -869,7 +869,7 @@ impl MilnorAlgebra {
 
         self.ppart_table.extend(new_deg as usize, |d| {
             let d = d as i32;
-            let mut new_row = Vec::new(); // Improve this
+            let mut new_row = vec![]; // Improve this
             for i in 0..xi_degrees.len() {
                 if xi_degrees[i] > d {
                     break;
@@ -905,7 +905,7 @@ impl MilnorAlgebra {
         let tau_degrees = combinatorics::tau_degrees(self.prime());
 
         self.basis_table.extend(max_degree as usize, |d| {
-            let mut table = Vec::new();
+            let mut table = vec![];
             let residue = d as u32 % q;
 
             for q_part in 0u32.. {
@@ -1003,7 +1003,7 @@ impl MilnorAlgebra {
 
     fn multiply_qpart(&self, m1: &MilnorBasisElement, f: u32) -> Vec<(u32, MilnorBasisElement)> {
         let mut new_result: Vec<(u32, MilnorBasisElement)> = vec![(1, m1.clone())];
-        let mut old_result: Vec<(u32, MilnorBasisElement)> = Vec::new();
+        let mut old_result: Vec<(u32, MilnorBasisElement)> = vec![];
 
         for k in BitflagIterator::set_bit_iterator(f as u64) {
             let k = k as u32;
@@ -1567,7 +1567,7 @@ impl MilnorAlgebra {
             let q_idx = self
                 .basis_element_to_index(&MilnorBasisElement {
                     q_part: 1 << (i - 1),
-                    p_part: Vec::new(),
+                    p_part: vec![],
                     degree: q_degree,
                 })
                 .to_owned();
@@ -1583,7 +1583,7 @@ impl MilnorAlgebra {
 
             let first_idx = self.basis_element_to_index(&MilnorBasisElement {
                 q_part: 1 << i,
-                p_part: Vec::new(),
+                p_part: vec![],
                 degree: first_degree,
             });
 
@@ -1612,9 +1612,9 @@ impl MilnorAlgebra {
         // apply this algorithm recursively to decompose an element.
 
         // result is the products we have added so far
-        let mut result = Vec::new();
+        let mut result = vec![];
         // buffer is the products we are adding in the current iteration
-        let mut buffer = Vec::new();
+        let mut buffer = vec![];
 
         // out_vec is the remaining items we have to kill. We are done when this hits zero.
         let mut out_vec = FpVector::new(p, self.dimension(degree));

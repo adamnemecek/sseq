@@ -155,7 +155,7 @@ impl Manager {
             Err(e) => self
                 .sseq_sender
                 .send(Message {
-                    recipients: Vec::new(),
+                    recipients: vec![],
                     sseq: SseqChoice::Main,
                     action: Action::from(Error {
                         message: format!("Failed to parse message:\n{m}\nError: {e}"),

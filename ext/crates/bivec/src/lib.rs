@@ -56,7 +56,7 @@ impl<T: Clone> BiVec<T> {
 impl<T> BiVec<T> {
     pub fn new(min_degree: i32) -> Self {
         Self {
-            data: Vec::new(),
+            data: vec![],
             min_degree,
         }
     }
