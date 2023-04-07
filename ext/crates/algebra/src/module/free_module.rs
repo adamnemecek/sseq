@@ -443,7 +443,7 @@ impl<'a, const U: bool, A: MuAlgebra<U>, T: Iterator<Item = i32> + 'a, const N: 
     type Item = GeneratorData<N>;
 
     fn next(&mut self) -> Option<Self::Item> {
-        let mut retval = GeneratorData {
+        let mut retval = Self::Item {
             gen_deg: self.gen_deg.next()?,
             start: [0; N],
             end: [0; N],

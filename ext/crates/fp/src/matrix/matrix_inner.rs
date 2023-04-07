@@ -52,12 +52,12 @@ impl Matrix {
         columns: usize,
         rows_capacity: usize,
         columns_capacity: usize,
-    ) -> Matrix {
+    ) -> Self {
         let mut vectors: Vec<FpVector> = Vec::with_capacity(rows_capacity);
         for _ in 0..rows {
             vectors.push(FpVector::new_with_capacity(p, columns, columns_capacity));
         }
-        Matrix {
+        Self {
             p,
             columns,
             vectors,
@@ -174,17 +174,17 @@ impl Matrix {
     ///               vec![0, 3, 4]];
     ///
     /// let m = Matrix::from_vec(p, &input);
-    pub fn from_vec(p: ValidPrime, input: &[Vec<u32>]) -> Matrix {
+    pub fn from_vec(p: ValidPrime, input: &[Vec<u32>]) -> Self {
         let rows = input.len();
         if rows == 0 {
-            return Matrix::new(p, 0, 0);
+            return Self::new(p, 0, 0);
         }
         let columns = input[0].len();
         let mut vectors = Vec::with_capacity(rows);
         for row in input {
             vectors.push(FpVector::from_slice(p, row));
         }
-        Matrix {
+        Self {
             p,
             columns,
             vectors,
@@ -210,11 +210,11 @@ impl Matrix {
     ///
     /// let (n, m) = Matrix::augmented_from_vec(p, &input);
     /// assert!(n >= input[0].len());
-    pub fn augmented_from_vec(p: ValidPrime, input: &[Vec<u32>]) -> (usize, Matrix) {
+    pub fn augmented_from_vec(p: ValidPrime, input: &[Vec<u32>]) -> (usize, Self) {
         let rows = input.len();
         let cols = input[0].len();
         let padded_cols = FpVector::padded_len(p, cols);
-        let mut m = Matrix::new(p, rows, padded_cols + rows);
+        let mut m = Self::new(p, rows, padded_cols + rows);
 
         for i in 0..rows {
             for j in 0..cols {
@@ -236,7 +236,7 @@ impl Matrix {
         }
     }
 
-    pub fn assign(&mut self, other: &Matrix) {
+    pub fn assign(&mut self, other: &Self) {
         for i in 0..self.rows() {
             self[i].assign(&other[i]);
         }
@@ -628,7 +628,7 @@ impl Matrix {
         let columns = self.columns();
         let source_columns = columns - first_source_col;
         let first_kernel_row = self.find_first_row_in_block(first_source_col);
-        let mut preimage = Matrix::new(p, first_kernel_row, source_columns);
+        let mut preimage = Self::new(p, first_kernel_row, source_columns);
         for i in 0..first_kernel_row {
             preimage[i]
                 .as_slice_mut()
@@ -723,7 +723,7 @@ impl Matrix {
         let first_kernel_row = self.find_first_row_in_block(first_source_column);
         // Every row after the first kernel row is also a kernel row, so now we know how big it is and can allocate space.
         let kernel_dimension = rows - first_kernel_row;
-        let mut kernel = Matrix::new(p, kernel_dimension, source_dimension);
+        let mut kernel = Self::new(p, kernel_dimension, source_dimension);
         kernel.initialize_pivots();
 
         if kernel_dimension == 0 {
@@ -1068,7 +1068,7 @@ impl AugmentedMatrix<3> {
             row.trim_start(offset);
         }
         self.inner.columns -= offset;
-        AugmentedMatrix::<2> {
+        AugmentedMatrix {
             inner: self.inner,
             start: [self.start[1] - offset, self.start[2] - offset],
             end: [self.end[1] - offset, self.end[2] - offset],

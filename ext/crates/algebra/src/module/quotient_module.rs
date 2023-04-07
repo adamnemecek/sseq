@@ -38,7 +38,7 @@ impl<M: Module> QuotientModule<M> {
             subspaces.push(Subspace::new(p, dim + 1, dim));
             basis_list.push((0..dim).collect());
         }
-        QuotientModule {
+        Self {
             module,
             subspaces,
             basis_list,

@@ -78,13 +78,7 @@ where
             }
         }
 
-        if self.clear_bottom
-            && (degree == self.min + 1
-                || degree == self.min + 1 + 1
-                || degree == self.min + 1 + 2
-                || degree == self.min + 1 + 4
-                || degree == self.min + 1 + 8)
-        {
+        if self.clear_bottom && matches!(degree - self.min - 1, 0 | 1 | 2 | 4 | 8) {
             return 0;
         }
         1

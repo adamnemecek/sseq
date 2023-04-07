@@ -107,7 +107,7 @@ where
         matrices: BiVec<Matrix>,
     ) -> Self {
         let min_degree = target.min_degree();
-        FullModuleHomomorphism {
+        Self {
             source,
             target,
             degree_shift,
@@ -149,7 +149,7 @@ where
             matrices.push_checked(matrix, target_deg);
         }
 
-        FullModuleHomomorphism {
+        Self {
             source,
             target,
             degree_shift,

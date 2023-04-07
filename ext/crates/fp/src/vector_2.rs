@@ -108,7 +108,7 @@ impl<'a> std::fmt::Display for Slice<'a> {
 }
 
 impl std::ops::AddAssign<&FpVector> for FpVector {
-    fn add_assign(&mut self, other: &FpVector) {
+    fn add_assign(&mut self, other: &Self) {
         self.add(other, 1);
     }
 }

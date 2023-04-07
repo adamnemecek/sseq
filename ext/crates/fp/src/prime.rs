@@ -83,7 +83,7 @@ impl std::error::Error for InvalidPrimeError {}
 impl TryFrom<u32> for ValidPrime {
     type Error = InvalidPrimeError;
 
-    fn try_from(p: u32) -> Result<Self, InvalidPrimeError> {
+    fn try_from(p: u32) -> Result<Self, Self::Error> {
         if is_valid_prime(p) {
             Ok(Self::new(p))
         } else {
