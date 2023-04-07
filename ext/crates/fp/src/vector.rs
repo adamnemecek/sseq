@@ -198,11 +198,11 @@ pub enum FpVectorNonZeroIterator<'a> {
 }
 
 impl FpVector {
-    pub fn new(p: ValidPrime, len: usize) -> FpVector {
+    pub fn new(p: ValidPrime, len: usize) -> Self {
         match_p!(p, FpVectorP::new_(len))
     }
 
-    pub fn new_with_capacity(p: ValidPrime, len: usize, capacity: usize) -> FpVector {
+    pub fn new_with_capacity(p: ValidPrime, len: usize, capacity: usize) -> Self {
         match_p!(p, FpVectorP::new_with_capacity_(len, capacity))
     }
 
@@ -385,8 +385,8 @@ impl From<&FpVector> for Vec<u32> {
     }
 }
 
-impl std::ops::AddAssign<&FpVector> for FpVector {
-    fn add_assign(&mut self, other: &FpVector) {
+impl std::ops::AddAssign<&Self> for FpVector {
+    fn add_assign(&mut self, other: &Self) {
         self.add(other, 1);
     }
 }
@@ -456,25 +456,25 @@ impl<'a, 'b> From<&'a mut SliceMut<'b>> for SliceMut<'a> {
 }
 
 impl<'a, 'b> From<&'a Slice<'b>> for Slice<'a> {
-    fn from(slice: &'a Slice<'b>) -> Slice<'a> {
+    fn from(slice: &'a Slice<'b>) -> Self {
         *slice
     }
 }
 
 impl<'a, 'b> From<&'a SliceMut<'b>> for Slice<'a> {
-    fn from(slice: &'a SliceMut<'b>) -> Slice<'a> {
+    fn from(slice: &'a SliceMut<'b>) -> Self {
         slice.as_slice()
     }
 }
 
 impl<'a> From<&'a FpVector> for Slice<'a> {
-    fn from(v: &'a FpVector) -> Slice<'a> {
+    fn from(v: &'a FpVector) -> Self {
         v.as_slice()
     }
 }
 
 impl<'a> From<&'a mut FpVector> for SliceMut<'a> {
-    fn from(v: &'a mut FpVector) -> SliceMut<'a> {
+    fn from(v: &'a mut FpVector) -> Self {
         v.as_slice_mut()
     }
 }
@@ -496,16 +496,17 @@ mod test {
     impl FpVector {
         pub fn diff_list(&self, other: &[u32]) -> Vec<VectorDiffEntry> {
             assert!(self.len() == other.len());
-            let mut result = Vec::new();
-            #[allow(clippy::needless_range_loop)]
-            for index in 0..self.len() {
-                let left = self.entry(index);
-                let right = other[index];
-                if left != right {
-                    result.push(VectorDiffEntry { index, left, right });
-                }
-            }
-            result
+            (0..self.len())
+                .flat_map(|i| {
+                    let left = self.entry(i);
+                    let right = other[i];
+                    if left != right {
+                        Some(VectorDiffEntry { index: i, left, right })
+                    } else {
+                        None
+                    }
+                })
+                .collect()
         }
 
         pub fn diff_vec(&self, other: &FpVector) -> Vec<VectorDiffEntry> {

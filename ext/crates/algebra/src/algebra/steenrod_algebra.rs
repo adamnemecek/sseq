@@ -71,8 +71,8 @@ pub enum SteenrodAlgebra {
 impl std::fmt::Display for SteenrodAlgebra {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         match self {
-            SteenrodAlgebra::AdemAlgebra(a) => a.fmt(f),
-            SteenrodAlgebra::MilnorAlgebra(a) => a.fmt(f),
+            Self::AdemAlgebra(a) => a.fmt(f),
+            Self::MilnorAlgebra(a) => a.fmt(f),
         }
     }
 }
@@ -80,8 +80,8 @@ impl std::fmt::Display for SteenrodAlgebra {
 impl SteenrodAlgebraT for SteenrodAlgebra {
     fn steenrod_algebra(&self) -> SteenrodAlgebraBorrow {
         match self {
-            SteenrodAlgebra::AdemAlgebra(a) => SteenrodAlgebraBorrow::BorrowAdem(a),
-            SteenrodAlgebra::MilnorAlgebra(a) => SteenrodAlgebraBorrow::BorrowMilnor(a),
+            Self::AdemAlgebra(a) => SteenrodAlgebraBorrow::BorrowAdem(a),
+            Self::MilnorAlgebra(a) => SteenrodAlgebraBorrow::BorrowMilnor(a),
         }
     }
 }

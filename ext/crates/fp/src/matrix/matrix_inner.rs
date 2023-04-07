@@ -36,12 +36,9 @@ impl Eq for Matrix {}
 impl Matrix {
     /// Produces a new matrix over F_p with the specified number of rows and columns, initialized
     /// to the 0 matrix.
-    pub fn new(p: ValidPrime, rows: usize, columns: usize) -> Matrix {
-        let mut vectors: Vec<FpVector> = Vec::with_capacity(rows);
-        for _ in 0..rows {
-            vectors.push(FpVector::new(p, columns));
-        }
-        Matrix {
+    pub fn new(p: ValidPrime, rows: usize, columns: usize) -> Self {
+        let vectors = vec![FpVector::new(p, columns); rows];
+        Self {
             p,
             columns,
             vectors,

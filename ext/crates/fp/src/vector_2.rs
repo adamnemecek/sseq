@@ -17,12 +17,12 @@ pub type SliceMut<'a> = SliceMutP<'a, 2>;
 pub type FpVectorNonZeroIterator<'a> = FpVectorNonZeroIteratorP<'a, 2>;
 
 impl FpVector {
-    pub fn new(_p: ValidPrime, len: usize) -> FpVector {
-        FpVector::new_(len)
+    pub fn new(_p: ValidPrime, len: usize) -> Self {
+        Self::new_(len)
     }
 
-    pub fn new_with_capacity(_p: ValidPrime, len: usize, capacity: usize) -> FpVector {
-        FpVector::new_with_capacity_(len, capacity)
+    pub fn new_with_capacity(_p: ValidPrime, len: usize, capacity: usize) -> Self {
+        Self::new_with_capacity_(len, capacity)
     }
 
     pub fn from_slice(_p: ValidPrime, slice: &[u32]) -> Self {

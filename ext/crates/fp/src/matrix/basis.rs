@@ -1,21 +1,21 @@
+use super::{AugmentedMatrix, Matrix};
 use crate::prime::ValidPrime;
 use crate::vector::{FpVector, FpVectorT};
-use super::{Matrix, AugmentedMatrix};
 
 #[derive(Clone)]
 pub struct Basis {
-    pub matrix : Matrix,
-    pub inverse : AugmentedMatrix<2>
+    pub matrix: Matrix,
+    pub inverse: AugmentedMatrix<2>,
 }
 
 impl Basis {
-    pub fn new(p : ValidPrime, dimension : usize) -> Self {
-        let mut result = Basis {
-            matrix :  Matrix::new(p, dimension, dimension),
-            inverse : AugmentedMatrix::<2>::new(p, dimension, [dimension, dimension])
+    pub fn new(p: ValidPrime, dimension: usize) -> Self {
+        let mut result = Self {
+            matrix: Matrix::new(p, dimension, dimension),
+            inverse: AugmentedMatrix::new(p, dimension, [dimension, dimension]),
         };
         result.matrix.add_identity(dimension, 0, 0);
-        result.inverse.segment(0,0).add_identity(dimension, 0, 0);        
+        result.inverse.segment(0, 0).add_identity(dimension, 0, 0);
         result.calculate_inverse();
         result
     }
@@ -41,7 +41,7 @@ impl Basis {
         std::mem::replace(&mut self.matrix, Matrix::new(p, 0, 0))
     }
 
-    pub fn set_matrix(&mut self, m : Matrix){
+    pub fn set_matrix(&mut self, m: Matrix) {
         self.matrix = m;
     }
 
@@ -54,28 +54,29 @@ impl Basis {
         false
     }
 
-
     pub fn calculate_inverse(&mut self) {
         let matrix = self.take_matrix();
         self.inverse.clear_slice();
-        self.inverse.segment(0,0).assign(&matrix);
+        self.inverse.segment(0, 0).assign(&matrix);
         self.set_matrix(matrix);
-        self.inverse.segment(1,1).set_to_zero();
-        self.inverse.segment(1,1).add_identity(self.matrix.rows(), 0, 0);
+        self.inverse.segment(1, 1).set_to_zero();
+        self.inverse
+            .segment(1, 1)
+            .add_identity(self.matrix.rows(), 0, 0);
         self.inverse.row_reduce();
-        std::mem::forget(self.inverse.segment(1,1));
+        std::mem::forget(self.inverse.segment(1, 1));
     }
 
-    pub fn apply(&self, result : &mut FpVector, coeff : u32, v : &FpVector) {
+    pub fn apply(&self, result: &mut FpVector, coeff: u32, v: &FpVector) {
         assert!(v.dimension() == self.matrix.columns());
-        for i in 0 .. v.dimension() {
+        for i in 0..v.dimension() {
             result.add(&self.matrix[i], (v.entry(i) * coeff) % *self.prime());
         }
     }
 
-    pub fn apply_inverse(&self, result : &mut FpVector, coeff : u32, v : &FpVector) {
+    pub fn apply_inverse(&self, result: &mut FpVector, coeff: u32, v: &FpVector) {
         assert!(v.dimension() == self.matrix.columns());
-        for i in 0 .. v.dimension() {
+        for i in 0..v.dimension() {
             result.add(&self.inverse[i], (v.entry(i) * coeff) % *self.prime());
         }
     }
@@ -86,7 +87,6 @@ impl Basis {
     //     self.calculate_inverse();
     // }
 }
-
 
 #[cfg(test)]
 mod tests {
@@ -107,7 +107,7 @@ mod tests {
             vec![1, 1, 1, 1],
             vec![1, 0, 1, 1],
             vec![0, 1, 1, 1],
-            vec![1, 0, 1, 0]
+            vec![1, 0, 1, 0],
         ];
 
         for (i, row) in basis.matrix.iter_mut().enumerate() {
@@ -117,7 +117,7 @@ mod tests {
         basis.inverse.assert_list_eq(inverse);
         let mut result = FpVector::new(p, 4);
         let mut input = FpVector::new(p, 4);
-        input.pack(&[1,1,1,1]);
+        input.pack(&[1, 1, 1, 1]);
         basis.apply(&mut result, 1, &input);
         println!("result : {}", result);
         result.set_to_zero();
@@ -125,15 +125,14 @@ mod tests {
         println!("inverse_result : {}", result);
         result.set_to_zero();
         println!("basis : {}", basis.matrix);
-        println!("inverse : {}", *basis.inverse);        
-        input.pack(&[1,1,0,1]);
+        println!("inverse : {}", *basis.inverse);
+        input.pack(&[1, 1, 0, 1]);
         println!("  inverse columns 111 : {}", basis.inverse.columns());
         basis.apply_inverse(&mut result, 1, &input);
         println!("inverse_result : {}", result);
-        result.set_to_zero();        
+        result.set_to_zero();
         // basis.replace_entry(2, &input);
         // println!("basis : {}", basis.matrix);
         // println!("inverse : {}", *basis.inverse);
     }
-
 }
