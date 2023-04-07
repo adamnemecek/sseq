@@ -284,7 +284,7 @@ impl<P: SseqProfile> SseqWrapper<P> {
                     .page_data(x, y)
                     .iter()
                     .map(|x| x.gens().map(Slice::to_owned).collect())
-                    .collect::<Vec<Vec<FpVector>>>(),
+                    .collect(),
             }),
         });
     }

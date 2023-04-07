@@ -501,7 +501,11 @@ mod test {
                     let left = self.entry(i);
                     let right = other[i];
                     if left != right {
-                        Some(VectorDiffEntry { index: i, left, right })
+                        Some(VectorDiffEntry {
+                            index: i,
+                            left,
+                            right,
+                        })
                     } else {
                         None
                     }
